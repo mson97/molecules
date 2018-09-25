@@ -1,0 +1,68 @@
+carbon_weight = 12.0110
+hydrogen_weight = 1.0079
+oxygen_weight = 15.9994
+
+chem_formula = input('Enter a chemical formula, or just the enter key to quit: ')
+
+isValid = True
+
+carbon_atoms = ''
+hydrogen_atoms = ''
+oxygen_atoms = ''
+carbon = []
+hydrogen = []
+oxygen = []
+numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'] # acceptable numbers
+characters = ['C', 'H', 'O'] # acceptable letters
+while chem_formula != '':
+    for i in range (0, len(chem_formula)):
+        if chem_formula[i] not in (characters + numbers) or chem_formula[0] in numbers: #creates larger list
+            print('Badly formed molecular formula; try again.')
+            isValid = False
+            break
+    if isValid:
+        for i in range(0, len(chem_formula)):
+            if chem_formula[i] == 'C':
+                if i < len(chem_formula) - 1 and chem_formula[(i + 1)] in numbers: # not the last character and next character is number
+                    for j in range(i, len(chem_formula)):
+                        if j < len(chem_formula) - 1 and chem_formula[j + 1] in numbers: # not the last character and next character is number
+                            carbon_atoms += chem_formula[j + 1]
+                        else:
+                            break
+                else: # last character or no number following C
+                    carbon_atoms = '1'
+                carbon.append(carbon_atoms)
+                carbon_atoms = ''
+            elif chem_formula[i] == 'H':
+                if i < len(chem_formula) - 1 and chem_formula[(i + 1)] in numbers:
+                    for j in range(i, len(chem_formula)):
+                        if j < len(chem_formula) - 1 and chem_formula[j + 1] in numbers:
+                            hydrogen_atoms += chem_formula[j + 1]
+                        else:
+                            break
+                else:
+                    hydrogen_atoms = '1'
+                hydrogen.append(hydrogen_atoms)
+                hydrogen_atoms = ''
+            elif chem_formula[i] == 'O':
+                if i < len(chem_formula) - 1 and chem_formula[(i + 1)] in numbers:
+                    for j in range(i, len(chem_formula)):
+                        if j < len(chem_formula) - 1 and chem_formula[j + 1] in numbers:
+                            oxygen_atoms += chem_formula[j + 1]
+                        else:
+                            break
+                else:
+                    oxygen_atoms = '1'
+                oxygen.append(oxygen_atoms)
+                oxygen_atoms = ''
+        carbon_num = (sum(int(i) for i in carbon))
+        hydrogen_num = (sum(int(i) for i in hydrogen))
+        oxygen_num = (sum(int(i) for i in oxygen))
+        molec_weight = (carbon_num * carbon_weight) + (hydrogen_num * hydrogen_weight) + (oxygen_num * oxygen_weight)
+        print('The molecular weight is %.4f' % molec_weight)
+    isValid = True
+    carbon = []
+    hydrogen = []
+    oxygen = []
+    chem_formula = input('Enter a chemical formula, or just the enter key to quit: ')
+
