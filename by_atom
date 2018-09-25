@@ -1,0 +1,8 @@
+carbon_weight = 12.0110
+hydrogen_weight = 1.0079
+oxygen_weight = 15.9994
+carbon = int(input('Enter the number of carbon atoms: '))
+hydrogen = int(input('Enter the number of hydrogen atoms: '))
+oxygen = int(input('Enter the number of oxygen atoms: '))
+molec_weight = carbon * carbon_weight + hydrogen * hydrogen_weight + oxygen * oxygen_weight
+print('The molecular weight is', molec_weight)
